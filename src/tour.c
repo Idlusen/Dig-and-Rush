@@ -1,4 +1,4 @@
-#include <stdlib.h>
+#include <stdlib.h>                                                                                           
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
@@ -21,6 +21,7 @@ void boucle_jeu(SDL_Renderer * rend) {
     int pas_defilement = 0;
     int parite_defilement = 0;
 
+	//obstacle -> case pierre obstacle_terre -> case en terre
     // Textures pour les obstacles
     SDL_Texture * tex_obstacle, * tex_obstacle_terre;
     t_entite * fond, * fond_tour, * fond_tour_2, * perso;
@@ -102,7 +103,12 @@ void boucle_jeu(SDL_Renderer * rend) {
                             break;
                         case SDL_SCANCODE_S:
                             if (perso->a_collision)
-                                changer_animation(perso, CREUSER);
+                            {
+                                {changer_animation(perso, CREUSER);
+                                if (perso->hitbox.y >= obstacle_terre->hitbox.y && perso->hitbox.y <= obstacle_terre->hitbox.y + obstacle_terre->hitbox.h) 
+                                {detruire_entite(&obstacle_terre);}
+                             }
+                             }
                             break;
                         default:
                             break;
