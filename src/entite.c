@@ -180,11 +180,41 @@ void animer(t_entite * e, long long int compteur_frames) {
 void changer_animation(t_entite * e, t_id_anim id_anim) {
     t_animation * anim = recuperer_animation(e->animations, e->n_animations, id_anim);
     if (anim) {
+        if (anim->decalage_dest_x != 0 || anim->decalage_dest_y != 0)
+            e->doit_restaurer_dst = VRAI;
+        if (anim->decalage_dest_x != 0)
+            e->dec_x_dst_prec = anim->decalage_dest_x;
+        if (anim->decalage_dest_y != 0)
+            e->dec_y_dst_prec = anim->decalage_dest_y;
+
+        if (e->rect_src->w != -1) {
+            e->w_src_prec = e->rect_src->w;
+            e->h_src_prec = e->rect_src->h;
+        }
+        else {
+            e->w_src_prec = anim->w_sprite;
+            e->h_src_prec = anim->h_sprite;
+        }
+
         e->animation_courante = anim;
         e->rect_src->x = anim->x_sprite_ini;
         e->rect_src->y = anim->y_sprite;
         e->rect_src->w = anim->w_sprite;
         e->rect_src->h = anim->h_sprite;
+
+        e->rect_dst->w *= anim->w_sprite / (float)e->w_src_prec;
+        e->rect_dst->h *= anim->h_sprite / (float)e->h_src_prec;
+
+        if (anim->decalage_dest_x == 0 && e->doit_restaurer_dst)
+            e->rect_dst->x += e->dec_x_dst_prec;
+        else
+            e->rect_dst->x -= anim->decalage_dest_x;
+        if (anim->decalage_dest_y == 0 && e->doit_restaurer_dst)
+            e->rect_dst->y += e->dec_y_dst_prec;
+        else
+            e->rect_dst->y -= anim->decalage_dest_y;
+        if ((anim->decalage_dest_x == 0 || anim->decalage_dest_y == 0) && e->doit_restaurer_dst)
+            e->doit_restaurer_dst = FAUX;
     }
 }
 
@@ -230,6 +260,8 @@ t_entite * creer_entite_depuis_texture(SDL_Texture * texture,
     nouv->deplacement = REPOS;
     nouv->sens_regard = DROITE;
     nouv->x_sprite = nouv->y_sprite = 0;
+
+    nouv->doit_restaurer_dst = FAUX;
 
     nouv->n_animations = 0;
     nouv->animations = NULL;

@@ -11,7 +11,7 @@ typedef struct {
 
 extern t_texture * textures;
 
-typedef enum { FIN_TAB_ANIMS, REPOS, CHUTE_G, CHUTE_D, DEPL_G, DEPL_D, CREUSER, ATTQ_G } t_id_anim;
+typedef enum { FIN_TAB_ANIMS, REPOS, CHUTE_G, CHUTE_D, DEPL_G, DEPL_D, CREUSER, ATTQ_G, ATTQ_D } t_id_anim;
 
 typedef struct {
     t_id_anim id;

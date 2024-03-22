@@ -7,6 +7,11 @@ typedef struct s_entite {
     SDL_Texture * texture;
     SDL_Rect * rect_src;
     SDL_Rect * rect_dst;
+    int dec_x_dst_prec;
+    int dec_y_dst_prec;
+    int w_src_prec;
+    int h_src_prec;
+    int doit_restaurer_dst;
 
     int est_relatif;
     SDL_Rect hitbox;

@@ -38,6 +38,8 @@ struct chargement chargements_texs[] = {
 
     {"ressources/Personnages/jackPerso.png", "jack"},
     {"ressources/img/tour.png", "fond_tour"},
+    {"ressources/Tour/Arriere_plan/Clouds/cloud1.png", "fond_jeu"},
+
 };
 
 struct chargement_spritesheet chargements_spritesheets[] = {
@@ -48,7 +50,8 @@ struct chargement_spritesheet chargements_spritesheets[] = {
                 {CHUTE_D, 5, 3*64, 64, 64, 0, 0, 1, 1.},
                 {DEPL_G, 0, 9*64, 64, 64, 0, 0, 9, 1/5.},
                 {DEPL_D, 0, 11*64, 64, 64, 0, 0, 9, 1/5.},
-                {ATTQ_G, 0, 20*64, 128, 128, 10, 10, 3, 1.},
+                {ATTQ_G, 0, 20*64+1*192, 192, 192, 17, 24, 6, 1/6.},
+                {ATTQ_D, 0, 20*64+3*192, 192, 192, 17, 24, 6, 1/6.},
                 {CREUSER, 0, 6*64, 64, 64, 0, 0, 8, 1./6},
                 {FIN_TAB_ANIMS, 0, 0, 0, 0, 0, 0, 0, 0.}
             }
